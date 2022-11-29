@@ -16,7 +16,7 @@ const UserTable = () => {
         try {
             setIsLoading(true)
             setError('')
-            const result = await fetch(`http://localhost:3004/users?_page=1`);
+            const result = await fetch(`http://localhost:3001/users?_page=1`);
             const data = await result.json();
             setUsers(data)
             setIsLoading(false)
@@ -33,7 +33,7 @@ const UserTable = () => {
     }, [])
 
     const fetchUsers = async () => {
-        const result = await fetch(`http://localhost:3004/users?_page=${page}`);
+        const result = await fetch(`http://localhost:3001/users?_page=${page}`);
         const data = await result.json();
         return data
     }
@@ -55,7 +55,7 @@ const UserTable = () => {
             <div className='container'>
                     <div className='pb-5'>
                         <h2>User Listing</h2>
-                        <AddUser/>
+                        <AddUser error={error}/>
                     </div>
                             <InfiniteScroll
                                 next={fetchData}

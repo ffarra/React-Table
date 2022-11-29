@@ -2,12 +2,11 @@ import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-// interface IProps {
-//     update: number
-//     setUpdate: (n: number) => void
-// }
+interface IProps {
+    error: string
+}
 
-function AddUser() {
+function AddUser({error}: IProps) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [age, setAge] = useState('')
@@ -22,7 +21,7 @@ function AddUser() {
         e.preventDefault();
         const data = {firstName, lastName, age, phone, email};
 
-        fetch("http://localhost:3004/users", {
+        fetch("http://localhost:3001/users", {
             method: "POST",
             headers: {"content-type": "application/json"},
             body: JSON.stringify(data)
@@ -47,7 +46,7 @@ function AddUser() {
     return (
         <>
             <div className='create-btn'>
-                <button onClick={() => setShow(true)} className='btn btn-outline-success'>
+                <button disabled={error.length !== 0} onClick={() => setShow(true)} className='btn btn-outline-success'>
                     Add new user
                 </button>
             </div>
